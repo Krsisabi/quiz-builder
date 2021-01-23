@@ -6,8 +6,11 @@
 	width: 100%;
 	background: linear-gradient(135deg, #e55d87 0%, #5fc3e4 100%);
 
-	h1 {
-		color: #fff;
-		margin-right: 15px;
+	.QuizWrapper {
+		width: 600px;
+
+		h1 {
+			color: #fff;
+		}
 	}
 }
