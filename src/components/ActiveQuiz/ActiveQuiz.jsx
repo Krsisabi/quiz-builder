@@ -1,7 +1,8 @@
 import React from 'react'
 import classes from './ActiveQuiz.module.scss'
+import AnswersList from './AnswersList/AnswersList'
 
-const ActiveQuiz = () => {
+const ActiveQuiz = props => {
 	return (
 		<div className={classes.ActiveQuiz}>
 			<p className={classes.Question}>
@@ -13,14 +14,11 @@ const ActiveQuiz = () => {
 				<small>3 из 12</small>
 			</p>
 
-			<ul>
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
+			<AnswersList 
+				answers={props.answers}
+			/>
 		</div>
 	)
 }
 
-export default ActiveQuiz;
+export default ActiveQuiz
