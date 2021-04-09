@@ -11,12 +11,17 @@ const Layout = props => {
 	const toggleMenuHandler = () => {
 		setMenu(!menu)
 	}
+
+	const menuCloseHandler = () => {
+		setMenu(false)
+	}
 	
 	return (
 		<div className={classes.Layout}>
 
 			<Drawer
 				isOpen={menu}
+				onClose={menuCloseHandler}
 			/>
 			
 			<MenuToggle
