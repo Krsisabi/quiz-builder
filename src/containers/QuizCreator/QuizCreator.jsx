@@ -3,7 +3,7 @@ import classes from './QuizCreator.module.scss'
 import Button from '../../components/UI/Button/Button'
 import Select from '../../components/UI/Select/Select'
 import Input from '../../components/UI/Input/Input'
-import {createControl} from '../../utils/formUtils'
+import {createControl, validate, validateForm } from '../../utils/formUtils'
 
 function createOptionControl(number) {
 	return createControl({
@@ -30,6 +30,7 @@ export default class QuizCreator extends Component {
 
 	state = {
 		quiz: [],
+		isFormValid: false,
 		formControls: createFormControls(),
 		rightAnswerId: 1
 	}
@@ -47,7 +48,18 @@ export default class QuizCreator extends Component {
 	}
 
 	onChangeHandler = (value, controlName) => {
+		const formControls = { ...this.state.formControls }
+		const control = { ...formControls[controlName] }
 
+		control.touched = true
+		control.value = value
+		control.valid = validate(control.value, control.validation)
+
+		formControls[controlName] = control
+		this.setState({
+			formControls,
+			isFormValid: validateForm(formControls)
+		})
 	}
 
 	renderInputs() {
@@ -104,6 +116,7 @@ export default class QuizCreator extends Component {
 					<Button
 						type="primary"
 						onClick={this.addQuestionHandler}
+						disabled={!this.state.isFormValid}
 					>
 						Add question
 					</Button>
@@ -111,6 +124,7 @@ export default class QuizCreator extends Component {
 					<Button
 						type="success"
 						onClick={this.createQuizHandler}
+						disabled={this.state.quiz.length === 0}
 					>
 						Create quiz
 					</Button>
