@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import classes from './QuizList.module.scss'
 import { NavLink } from 'react-router-dom'
+import Loader from '../../components/UI/Loader/Loader'
 import axios from 'axios'
 
 export default class QuizList extends Component {
 
 	state = {
-		quizzes: []
+		quizzes: [],
+		loading: true
 	}
 
 	renderQuizzes() {
@@ -37,7 +39,7 @@ export default class QuizList extends Component {
 			})
 
 			this.setState({
-				quizzes
+				quizzes, loading: false
 			})
 		} catch (e) {
 			console.log(e)
@@ -49,9 +51,14 @@ export default class QuizList extends Component {
 			<div className={classes.QuizList}>
 				<div>
 					<h1>Quiz List</h1>
-					<ul>
-						{this.renderQuizzes()}
-					</ul>
+					{
+						this.state.loading
+							? <Loader />
+							: <ul>
+									{this.renderQuizzes()}
+								</ul>
+					}
+
 				</div>
 			</div>
 		)
