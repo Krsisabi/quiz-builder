@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classes from './Auth.module.scss'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
+import axios from 'axios'
 
 function validateEmail(email) {
 	const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,16 +41,38 @@ export default class Auth extends Component {
 		}
 	}
 
-	loginHandler = () => {
-		
+	loginHandler = async e => {
+		const authData = {
+			email: this.state.formControls.email.value,
+			password: this.state.formControls.password.value,
+			returnSecureToken: true
+		}
+
+		try {
+			const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAJD0FGuJ6NKwJRTzbUDCsFrKjdWpFwUsI', authData)
+			console.log('response: ', response);
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
-	registerHandler = () => {
-		
+	registerHandler = async e => {
+		const authData = {
+			email: this.state.formControls.email.value,
+			password: this.state.formControls.password.value,
+			returnSecureToken: true
+		}
+
+		try {
+			const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAJD0FGuJ6NKwJRTzbUDCsFrKjdWpFwUsI', authData)
+			console.log('response: ', response);
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	submitHandler = event => {
-		
+		event.preventDefault()
 	}
 
 	validateControl(value, validation) {
