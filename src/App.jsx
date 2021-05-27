@@ -6,8 +6,18 @@ import Auth from './containers/Auth/Auth'
 import QuizCreator from './containers/QuizCreator/QuizCreator'
 import { connect } from 'react-redux'
 import Logout from './components/Logout/Logout'
+import { useEffect } from 'react'
+import { autoLogin } from './store/actions/auth'
 
 function App(props) {
+
+	const useAutoLogin = () => {
+		useEffect(() => {
+			props.autoLogin()
+		}, [])
+	}
+
+	useAutoLogin()
 
 	let routes = (
 		<Switch>
@@ -43,4 +53,10 @@ function mapStateToProps(state) {
 	}
 }
 
-export default withRouter(connect(mapStateToProps)(App))
+function mapDispatchToProps(dispatch) {
+	return {
+		autoLogin: () => dispatch(autoLogin())
+	}
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
