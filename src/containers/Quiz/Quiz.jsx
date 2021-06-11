@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes, { QuizWrapper } from './Quiz.module.scss'
+import classes from './Quiz.module.scss'
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz'
 import Loader from '../../components/UI/Loader/Loader'
@@ -19,7 +19,7 @@ class Quiz extends Component {
 	render() {
 		return (
 			<div className={classes.Quiz}>
-				<div className={QuizWrapper}>
+				<div className={classes.QuizWrapper}>
 					<h1>Quiz</h1>
 					{
 						this.props.loading || !this.props.quiz
